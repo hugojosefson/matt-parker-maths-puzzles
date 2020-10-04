@@ -18,12 +18,15 @@ isPrime _ = False
 isPrimePair :: Int -> Int -> Bool
 isPrimePair a b = isPrime $ a + b
 
-areAllPrimePairs :: [Int] -> Bool
-areAllPrimePairs (a:b:[]) = isPrimePair a b
-areAllPrimePairs (a:b:xs) = isPrimePair a b && areAllPrimePairs (b:xs)
+areAllPrimePairs :: Int -> Int -> [Int] -> Bool
+areAllPrimePairs a b [] = isPrimePair a b
+areAllPrimePairs a b (c:xs) = isPrimePair a b && areAllPrimePairs b c xs
+
+isSolution :: [Int] -> Bool
+isSolution (a:b:xs) = areAllPrimePairs a b xs
 
 primePairs :: Int -> [[Int]]
-primePairs n = filter areAllPrimePairs $ permutations [1..n]
+primePairs n = filter isSolution $ permutations [1..n]
 
 primePairsCount :: Int -> Int
 primePairsCount n = length $ primePairs n
