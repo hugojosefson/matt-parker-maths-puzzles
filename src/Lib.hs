@@ -1,19 +1,16 @@
 module Lib where
 
 import Data.List
+import GHC.Float.RealFracMethods
+
+isDivisible :: Int -> Int -> Bool
+isDivisible a b = mod a b == 0
+
+intSqrt :: Int -> Int
+intSqrt a = floor $ sqrt $ int2Float a
 
 isPrime :: Int -> Bool
-isPrime 3 = True
-isPrime 5 = True
-isPrime 7 = True
-isPrime 11 = True
-isPrime 13 = True
-isPrime 17 = True
-isPrime 19 = True
-isPrime 23 = True
-isPrime 29 = True
-isPrime 31 = True
-isPrime _ = False
+isPrime n = not $ any (isDivisible n) [2..(intSqrt n)]
 
 isPrimePair :: Int -> Int -> Bool
 isPrimePair a b = isPrime $ a + b
