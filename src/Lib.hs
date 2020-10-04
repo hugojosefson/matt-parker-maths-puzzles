@@ -1,7 +1,6 @@
 module Lib where
 
-range :: Int -> [Int]
-range max = [1..max]
+import Data.List
 
 isPrime :: Int -> Bool
 isPrime 3 = True
@@ -14,8 +13,15 @@ isPrime 19 = True
 isPrime 23 = True
 isPrime _ = False
 
-isPrimePair :: (Int, Int) -> Bool
-isPrimePair a b = isPrime a+b
+isPrimePair :: Int -> Int -> Bool
+isPrimePair a b = isPrime $ a + b
 
---primePairs :: [Int] -> Maybe [Int]
---primePairs numbers =
+areAllPrimePairs :: [Int] -> Bool
+areAllPrimePairs (a:b:[]) = isPrimePair a b
+areAllPrimePairs (a:b:xs) = isPrimePair a b && areAllPrimePairs (b:xs)
+
+primePairs :: Int -> [[Int]]
+primePairs n = filter areAllPrimePairs $ permutations [1..n]
+
+primePairsCount :: Int -> Int
+primePairsCount n = length $ primePairs n
