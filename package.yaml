@@ -22,9 +22,6 @@ description:         Please see the README on GitHub at <https://github.com/gith
 dependencies:
 - base >= 4.7 && < 5
 
-library:
-  source-dirs: src
-
 executables:
   matt-parker-maths-puzzles-exe:
     main:                Main.hs
@@ -34,7 +31,6 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - matt-parker-maths-puzzles
 
 tests:
   matt-parker-maths-puzzles-test:
@@ -45,4 +41,3 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - matt-parker-maths-puzzles
